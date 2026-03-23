@@ -1,10 +1,13 @@
 <template>
   <div class="home">
-    <img src="@/assets/logo.png" class="logo" />
-
+    <img :src="logo" alt="Logo" class="logo" />
     <p>Modern metal from Norway</p>
   </div>
 </template>
+
+<script setup>
+import logo from '../assets/logo.png'
+</script>
 
 <style scoped>
 .home {
