@@ -1,6 +1,6 @@
 <template>
   <nav class="nav">
-    <div class="logo">ISSUED FOR DESTRUCTION</div>
+    <div class="logo">{{ vBandName1 }}</div>
 
     <div class="links">
       <router-link to="/">Home</router-link>
@@ -10,8 +10,20 @@
       <router-link to="/merch">Merch</router-link>
     </div>
   </nav>
+  <SocialLinks />
 </template>
 
+<script setup>
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
+import SocialLinks from './social-links.vue'
+
+const vRoute = useRoute()
+const vBandName1 = computed(() => (vRoute.path !== '/' ? 'ISSUED FOR DESTRUCTION' : ''))
+
+console.log('path:', vRoute.path)
+console.log('name:', vRoute.name)
+</script>
 <style scoped>
 .nav {
   position: fixed;
