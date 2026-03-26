@@ -19,7 +19,7 @@ import logo from '../assets/logo.png'
 }
 
 .logo {
-  width: 500px;
+  width: 700px;
   max-width: 80%;
   margin-bottom: 30px;
   opacity: 0.95;
