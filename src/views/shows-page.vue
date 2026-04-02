@@ -13,7 +13,7 @@
       </div>
 
       <div class="actions">
-        <button v-if="show.tickets">Tickets</button>
+        <button v-if="show.tickets" @click="show.website()">Tickets</button>
         <span v-else class="soldout">Sold Out</span>
       </div>
     </div>
@@ -22,10 +22,11 @@
 
 <script setup>
 const shows = [
-  { id: 1, date: '12 APR', venue: 'Folken', city: 'Stavanger', tickets: true },
-  { id: 2, date: '25 APR', venue: 'Rockefeller', city: 'Oslo', tickets: true },
-  { id: 3, date: '03 MAY', venue: 'Garage', city: 'Bergen', tickets: false },
+  { id: 1, date: '19 SEPT', venue: 'Fest I Hallen 2026', city: 'Skjold City', tickets: true , website: () => window.open('https://fb.me/2gh4anCjlQQ83Do','_blank')},
+  { id: 2, date: '??', venue: 'Book Us', city: 'Somewhere', tickets: false }
 ]
+
+
 </script>
 
 <style scoped>
