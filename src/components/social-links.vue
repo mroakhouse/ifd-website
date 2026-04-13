@@ -4,7 +4,10 @@
       <i class="fab fa-facebook"></i>
     </a>
 
-    <a href="https://instagram.com/yourband" target="_blank">
+    <a
+      href="https://soundcloud.com/thomas-eike-hustoft/issued-for-destruction-satan-just-arrived?"
+      target="_blank"
+    >
       <i class="fab fa-instagram"></i>
     </a>
 

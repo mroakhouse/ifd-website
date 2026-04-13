@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img :src="logo" alt="Logo" class="logo" />
-    <p>Modern metal from Norway</p>
+    <p>Probably The Worst Band In The World</p>
   </div>
 </template>
 
