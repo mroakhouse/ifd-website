@@ -21,8 +21,8 @@ import SocialLinks from './social-links.vue'
 const vRoute = useRoute()
 const vBandName1 = computed(() => (vRoute.path !== '/' ? 'ISSUED FOR DESTRUCTION' : ''))
 
-console.log('path:', vRoute.path)
-console.log('name:', vRoute.name)
+// console.log('path:', vRoute.path)
+// console.log('name:', vRoute.name)
 </script>
 <style scoped>
 .nav {
