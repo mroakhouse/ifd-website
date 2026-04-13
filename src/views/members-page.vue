@@ -15,7 +15,7 @@
 
 <script setup>
 import jarle from '@/assets/members/jarle1.png'
-import rune from '@/assets/members/rune1.png'
+import rune from '@/assets/members/Rune1.png'
 import thomas from '@/assets/members/thomas1.png'
 import kristoffer from '@/assets/members/kristoffer1.png'
 import johannes from '@/assets/members/johannes1.png'
