@@ -4,15 +4,14 @@
       <i class="fab fa-facebook"></i>
     </a>
 
+    <a href="https://www.youtube.com/@IssuedForDestruction" target="_blank">
+      <i class="fab fa-youtube"></i>
+    </a>
     <a
       href="https://soundcloud.com/thomas-eike-hustoft/issued-for-destruction-satan-just-arrived?"
       target="_blank"
     >
-      <i class="fab fa-instagram"></i>
-    </a>
-
-    <a href="https://www.youtube.com/@IssuedForDestruction" target="_blank">
-      <i class="fab fa-youtube"></i>
+      <i class="fab fa-soundcloud"></i>
     </a>
   </div>
 </template>

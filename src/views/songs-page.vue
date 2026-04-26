@@ -24,19 +24,11 @@
 const songs = [
   {
     id: 1,
-    release: '30 MAY',
-    name: 'Satan Just Arrived',
-    released: 'not yet released',
-    download: true,
-  },
-  {
-    id: 2,
-    release: '25 JUN',
+    release: '',
     name: 'Issued For Destruction',
     released: 'not yet released',
-    download: true,
+    download: false,
   },
-  { id: 3, release: '16 AUG', name: 'Stratenrøver', released: 'not yet released', download: false },
 ]
 </script>
 

@@ -6,8 +6,9 @@
       <router-link to="/">Home</router-link>
       <router-link to="/shows">Shows</router-link>
       <router-link to="/songs">Songs</router-link>
-      <router-link to="/members">Members</router-link>
-      <router-link to="/merch">Merch</router-link>
+      <!-- <router-link to="/members">Members</router-link> -->
+      <router-link to="/band">Band</router-link>
+      <!-- <router-link to="/merch">Merch</router-link> -->
     </div>
   </nav>
   <SocialLinks />
