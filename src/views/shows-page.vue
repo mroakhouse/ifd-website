@@ -22,8 +22,8 @@
 
 <script setup>
 const shows = [
-  { id: 1, date: '19 SEPT', venue: 'Fest I Hallen 2026', city: 'Skjold City', tickets: true , website: () => window.open('https://fb.me/2gh4anCjlQQ83Do','_blank')},
-  { id: 2, date: '??', venue: 'Book Us', city: 'Somewhere', tickets: false }
+  // { id: 2, date: '19 SEPT', venue: 'Fest I Hallen 2026', city: 'Skjold City', tickets: true , website: () => window.open('https://fb.me/2gh4anCjlQQ83Do','_blank')},
+  { id: 1, date: '??', venue: 'Book Us', city: 'Somewhere', tickets: false }
 ]
 
 
