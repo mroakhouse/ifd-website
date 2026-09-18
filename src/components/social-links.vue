@@ -1,40 +1,19 @@
 <template>
-  <div class="socials">
-    <a href="https://www.facebook.com/multimetalmaniacs" target="_blank">
-      <i class="fab fa-facebook"></i>
-    </a>
-
-    <a href="https://www.youtube.com/@IssuedForDestruction" target="_blank">
-      <i class="fab fa-youtube"></i>
-    </a>
-    <a
-      href="https://soundcloud.com/thomas-eike-hustoft/issued-for-destruction-satan-just-arrived?"
-      target="_blank"
+  <div class="socials" aria-label="Follow the band">
+    <a href="https://www.facebook.com/multimetalmaniacs" target="_blank" rel="noopener noreferrer"
+      >Facebook ↗</a
     >
-      <i class="fab fa-soundcloud"></i>
-    </a>
+    <a
+      href="https://www.youtube.com/@IssuedForDestruction"
+      target="_blank"
+      rel="noopener noreferrer"
+      >YouTube ↗</a
+    >
+    <a
+      href="https://soundcloud.com/thomas-eike-hustoft/issued-for-destruction-satan-just-arrived"
+      target="_blank"
+      rel="noopener noreferrer"
+      >SoundCloud ↗</a
+    >
   </div>
 </template>
-
-<script></script>
-
-<style scoped>
-.socials {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  gap: 20px;
-}
-
-.socials a {
-  color: white;
-  font-size: 24px;
-  transition: 0.3s;
-}
-
-.socials a:hover {
-  color: red;
-  transform: scale(1.2);
-}
-</style>

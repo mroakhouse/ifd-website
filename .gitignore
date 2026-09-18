@@ -37,3 +37,9 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+# Netlify local runtime and environment secrets
+.netlify/
+.env
+.env.*
+!.env.example

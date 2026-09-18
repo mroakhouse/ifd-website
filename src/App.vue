@@ -1,72 +1,22 @@
-<template>
-  <div :class="['app', isHome ? 'home' : 'subpage']">
-    <Navbar />
-    <router-view />
-  </div>
-</template>
-
 <script setup>
-import { useRoute } from 'vue-router'
-import { computed } from 'vue'
+import { onMounted } from 'vue'
 import Navbar from './components/navbar-comp.vue'
-
-const route = useRoute()
-const isHome = computed(() => route.path === '/')
+import SocialLinks from './components/social-links.vue'
+import { loadContent } from './lib/content'
+onMounted(loadContent)
 </script>
-
-<style>
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: black;
-  color: #eaeaea;
-}
-
-.app {
-  position: relative;
-  min-height: 100vh;
-}
-
-/* 🔥 BACKGROUND IMAGE LAYER */
-.app::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url('/src/assets/logo.png');
-  background-size: cover;
-  background-position: center;
-  z-index: -2;
-  box-sizing: border-box;
-}
-
-/* 🔥 OVERLAY LAYER */
-.app::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  box-sizing: border-box;
-
-  /* IMPORTANT */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  /* default */
-  background: rgba(0, 0, 0, 0.75);
-}
-
-/* 🏠 HOME = PURE BLACK */
-.home::before {
-  background-image: none; /* 👈 remove logo */
-}
-
-.home::after {
-  background: black; /* 👈 clean look */
-  backdrop-filter: none;
-}
-
-/* SUBPAGES (darker) */
-.subpage::after {
-  background: rgba(0, 0, 0, 0.8);
-}
-</style>
+<template>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <Navbar />
+  <main id="main"><router-view /></main>
+  <footer class="footer wrap">
+    <router-link class="wordmark" to="/"
+      >ISSUED FOR<br />DESTRUCTION<span>EST. 2016</span></router-link
+    >
+    <SocialLinks />
+    <div class="footer-meta">
+      <span>© {{ new Date().getFullYear() }} Issued For Destruction</span
+      ><router-link to="/admin">Band login ↗</router-link>
+    </div>
+  </footer>
+</template>

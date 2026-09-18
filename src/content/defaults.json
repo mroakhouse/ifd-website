@@ -1,0 +1,41 @@
+{
+  "news": [],
+  "members": [
+    {
+      "id": "jarle",
+      "name": "Jarle",
+      "role": "Vocals",
+      "image": "/members/jarle1.png",
+      "bio": "Joined in 2023, bringing new energy and a new chapter for Issued For Destruction."
+    },
+    {
+      "id": "rune",
+      "name": "Rune",
+      "role": "Guitar / Backing vocals",
+      "image": "/members/Rune1.png",
+      "bio": "A founding member. It started with Thomas, a shared love of heavy riffs, and a jam in 2016."
+    },
+    {
+      "id": "thomas",
+      "name": "Thomas",
+      "role": "Guitar / Backing vocals",
+      "image": "/members/thomas1.png",
+      "bio": "A founding member of Issued For Destruction, making noise with Rune since 2016."
+    },
+    {
+      "id": "kristoffer",
+      "name": "Kristoffer",
+      "role": "Bass",
+      "image": "/members/kristoffer1.png",
+      "bio": "Part of the lineup that pushed the music into heavier and darker territory."
+    },
+    {
+      "id": "johannes",
+      "name": "Johannes",
+      "role": "Drums / Backing vocals",
+      "image": "/members/johannes1.png",
+      "bio": "Part of the lineup that pushed the music into heavier and darker territory."
+    }
+  ],
+  "story": "Issued For Destruction was born in 2016, when Thomas and Rune started jamming together with no real plan — just a shared love for heavy riffs.\n\nJohne soon joined, forming a trio that built the foundation of the band’s raw and aggressive sound. As the band evolved, Kristoffer and Johannes joined, pushing the music further into heavier and darker territory.\n\nIn 2023, Johne left the band. Shortly after, Jarle joined on vocals, bringing new energy and a new chapter for Issued For Destruction."
+}

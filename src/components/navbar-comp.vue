@@ -1,63 +1,41 @@
-<template>
-  <nav class="nav">
-    <div class="logo">{{ vBandName1 }}</div>
-
-    <div class="links">
-      <router-link to="/">Home</router-link>
-      <router-link to="/shows">Shows</router-link>
-      <router-link to="/songs">Songs</router-link>
-      <!-- <router-link to="/members">Members</router-link> -->
-      <router-link to="/band">Band</router-link>
-      <!-- <router-link to="/merch">Merch</router-link> -->
-    </div>
-  </nav>
-  <SocialLinks />
-</template>
-
 <script setup>
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { computed } from 'vue'
-import SocialLinks from './social-links.vue'
-
-const vRoute = useRoute()
-const vBandName1 = computed(() => (vRoute.path !== '/' ? 'ISSUED FOR DESTRUCTION' : ''))
-
-// console.log('path:', vRoute.path)
-// console.log('name:', vRoute.name)
+const open = ref(false)
+const route = useRoute()
+watch(
+  () => route.path,
+  () => {
+    open.value = false
+  },
+)
 </script>
-<style scoped>
-.nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 18px 40px;
-  display: flex;
-  justify-content: space-between;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  z-index: 10;
-  box-sizing: border-box;
-}
-
-.logo {
-  font-size: 0.9rem;
-  letter-spacing: 3px;
-  opacity: 0.8;
-}
-
-.links a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: #aaa;
-  font-size: 0.9rem;
-  transition: 0.2s;
-}
-
-.links a:hover {
-  color: white;
-}
-
-.links a.router-link-active {
-  color: white;
-}
-</style>
+<template>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <router-link to="/" class="wordmark" aria-label="Issued For Destruction home"
+        >ISSUED FOR<br />DESTRUCTION<span>HEAVY. LOUD. UNFILTERED.</span></router-link
+      >
+      <button
+        class="menu-toggle"
+        :aria-expanded="open"
+        aria-controls="navigation"
+        @click="open = !open"
+      >
+        {{ open ? 'Close ×' : 'Menu +' }}
+      </button>
+      <div id="navigation" class="nav-links" :class="{ open }">
+        <router-link to="/">Home</router-link><router-link to="/news">News</router-link
+        ><router-link to="/songs">Music</router-link><router-link to="/shows">Live</router-link
+        ><router-link to="/band">The band</router-link>
+        <a
+          class="nav-listen"
+          href="https://www.youtube.com/@IssuedForDestruction"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Listen ↗</a
+        >
+      </div>
+    </nav>
+  </header>
+</template>
