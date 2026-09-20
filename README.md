@@ -30,14 +30,16 @@ No passwords or service tokens belong in frontend code. There is no built-in def
 - News: add a title, date, introduction and story; optionally provide an HTTPS image URL. Preview the text, then check **Publish on the website when saved** and choose **Save changes**. Leave unchecked to save a private draft. Dates are display dates, not scheduled publishing.
 - Members: edit names, instruments, biographies and photo URLs; add or remove members.
 - Band story: edit the biography paragraphs.
+- Live shows: add or edit event names, dates, venues/locations and optional HTTPS event/ticket links. Choose Upcoming, Done or Cancelled. Past dates appear under past shows using the Europe/Oslo calendar date; done and cancelled shows are never promoted as upcoming on the homepage. Cancelled shows remain visible in their own section.
+- Music: add or edit titles, descriptions, artwork, listening platforms and HTTPS listening/video links. New entries appear first. Artwork is optional and defaults to the band logo. These are links to hosted music; audio uploads are not included.
 - A save applies all pending edits in the editor. Removal needs confirmation, then Save changes.
 - If another editor saves first, your save is rejected to prevent overwriting their work. Copy your changes somewhere safe, reload and reapply.
 - Photos currently use image links or existing files under public/members; file upload is not included.
 
 Content is stored in the site-wide **ifd-content** Netlify Blobs store, key **content**, and survives redeployments. Published changes appear without rebuilding. News drafts are filtered by the server, never sent in public responses. Text is rendered without raw HTML.
 
-Back up content by downloading the content blob from Netlify's Blobs dashboard. The initial content is in src/content/defaults.json; it is used only until the first save. Editing this seed after a save will not overwrite live content. Deploy previews on the same Netlify project share site-wide storage; use a separate project for isolated editorial testing.
+Back up content by downloading the content blob from Netlify's Blobs dashboard. The initial content is in src/content/defaults.json; it is used until the first save. Existing saves without shows or music receive the original show and track as initial entries in those collections. Intentionally empty collections stay empty. Editing this seed after a save will not overwrite live content. Deploy previews on the same Netlify project share site-wide storage; use a separate project for isolated editorial testing.
 
 ## Current scope
 
-Music links and the existing Fest I Hallen show remain in their Vue pages. The editor manages news, members and band history. No fictional news, releases or additional dates have been added. Live Identity configuration and a deployed login/save round trip must be verified on your Netlify project after enabling Identity.
+The editor manages news, members, band history, live shows and music links. No fictional news, releases or additional dates have been added. Live Identity configuration and a deployed login/save round trip must be verified on your Netlify project after enabling Identity.

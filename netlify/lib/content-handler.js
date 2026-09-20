@@ -21,6 +21,35 @@ function image(value) {
   }
   return url
 }
+function link(value, name, required = false) {
+  const url = string(value, name, 2000, required)
+  if (url) {
+    try {
+      if (new URL(url).protocol !== 'https:') throw new Error()
+    } catch {
+      throw new Error(`${name} must use an HTTPS URL.`)
+    }
+  }
+  return url
+}
+function date(value, name) {
+  if (
+    typeof value !== 'string' ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(value) ||
+    Number.isNaN(Date.parse(value)) ||
+    new Date(value).toISOString().slice(0, 10) !== value
+  )
+    throw new Error(`Invalid ${name} date.`)
+  return value
+}
+// Existing saved sites predate these collections. Preserve intentional empty lists.
+function withCollections(data) {
+  return {
+    ...data,
+    shows: data.shows === undefined ? defaults.shows : data.shows,
+    music: data.music === undefined ? defaults.music : data.music,
+  }
+}
 export function validateContent(data) {
   if (
     !data ||
@@ -30,6 +59,14 @@ export function validateContent(data) {
     data.members.length > 30
   )
     throw new Error('Invalid content collection.')
+  data = withCollections(data)
+  if (
+    !Array.isArray(data.shows) ||
+    !Array.isArray(data.music) ||
+    data.shows.length > 500 ||
+    data.music.length > 200
+  )
+    throw new Error('Invalid shows or music collection.')
   const ids = new Set()
   const id = (value) => {
     if (typeof value !== 'string' || !/^[a-zA-Z0-9-]{1,80}$/.test(value) || ids.has(value))
@@ -39,6 +76,27 @@ export function validateContent(data) {
   }
   return {
     story: string(data.story, 'band story', 20000),
+    shows: data.shows.map((item) => {
+      if (!['upcoming', 'done', 'cancelled'].includes(item.status))
+        throw new Error('Invalid show status.')
+      return {
+        id: id(item.id),
+        title: string(item.title, 'show title', 180),
+        date: date(item.date, 'show'),
+        location: string(item.location, 'show location', 200),
+        url: link(item.url, 'Event / tickets URL'),
+        status: item.status,
+      }
+    }),
+    music: data.music.map((item) => ({
+      id: id(item.id),
+      title: string(item.title, 'music title', 180),
+      description: string(item.description, 'music description', 5000, false),
+      image: image(item.image),
+      platform: string(item.platform, 'listening platform', 80),
+      url: link(item.url, 'Listening URL', true),
+      videoUrl: link(item.videoUrl, 'Video URL'),
+    })),
     news: data.news.map((item) => {
       if (
         !/^\d{4}-\d{2}-\d{2}$/.test(item.date) ||
@@ -92,7 +150,7 @@ export function createContentHandler({ getUser, getStore }) {
       const store = getStore({ name: 'ifd-content', consistency: 'strong' })
       if (request.method === 'GET') {
         const saved = await store.getWithMetadata('content', { type: 'json' })
-        const data = saved?.data || defaults
+        const data = withCollections(saved?.data || defaults)
         return reply(admin ? { content: data, version: saved?.etag || null } : publicContent(data))
       }
       if (!request.headers.get('content-type')?.includes('application/json'))

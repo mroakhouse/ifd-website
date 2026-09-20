@@ -1,10 +1,16 @@
 <script setup>
 import { computed } from 'vue'
 import { content, formatDate } from '../lib/content'
+import { groupShows } from '../lib/shows'
+// Show the three newest stories, recalculating when shared news changes.
+// Copy the array before sorting so other pages keep their existing order.
+// Dates use YYYY-MM-DD, so comparing the strings also orders them by date.
 const latest = computed(() =>
   [...content.news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3),
 )
-const upcoming = new Date() < new Date('2026-09-20T00:00:00+02:00')
+const shows = computed(() => groupShows(content.shows))
+const featuredShow = computed(() => shows.value.upcoming[0] || shows.value.past[0])
+const upcoming = computed(() => shows.value.upcoming.length > 0)
 </script>
 <template>
   <section class="hero">
@@ -72,16 +78,23 @@ const upcoming = new Date() < new Date('2026-09-20T00:00:00+02:00')
         <p>Heavy riffs hit different in the front row.</p>
       </div>
       <div class="gig-card">
-        <p class="eyebrow">{{ upcoming ? 'NEXT SHOW' : 'PAST SHOW' }} / 19 SEPTEMBER 2026</p>
-        <h3>Fest I Hallen</h3>
-        <p>Skjold City</p>
-        <a
-          class="button primary"
-          href="https://fb.me/2gh4anCjlQQ83Do"
-          target="_blank"
-          rel="noopener noreferrer"
-          >{{ upcoming ? 'Event & tickets ↗' : 'View event ↗' }}</a
-        ><router-link class="text-link" to="/shows">All live dates →</router-link>
+        <template v-if="featuredShow">
+          <p class="eyebrow">
+            {{ upcoming ? 'NEXT SHOW' : 'PAST SHOW' }} / {{ formatDate(featuredShow.date) }}
+          </p>
+          <h3>{{ featuredShow.title }}</h3>
+          <p>{{ featuredShow.location }}</p>
+          <a
+            v-if="featuredShow.url"
+            class="button primary"
+            :href="featuredShow.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{{ upcoming ? 'Event & tickets ↗' : 'View event ↗' }}</a
+          >
+        </template>
+        <p v-else>New live dates coming soon.</p>
+        <router-link class="text-link" to="/shows">All live dates →</router-link>
       </div>
     </div>
   </section>

@@ -1,5 +1,26 @@
 {
   "news": [],
+  "shows": [
+    {
+      "id": "fest-i-hallen-2026",
+      "title": "Fest I Hallen 2026",
+      "date": "2026-09-19",
+      "location": "Skjold City",
+      "url": "https://fb.me/2gh4anCjlQQ83Do",
+      "status": "upcoming"
+    }
+  ],
+  "music": [
+    {
+      "id": "satan-just-arrived",
+      "title": "Satan Just Arrived",
+      "description": "Heavy riffs. Raw energy. Issued For Destruction.",
+      "image": "/Logo.png",
+      "platform": "SoundCloud",
+      "url": "https://soundcloud.com/thomas-eike-hustoft/issued-for-destruction-satan-just-arrived",
+      "videoUrl": "https://www.youtube.com/@IssuedForDestruction"
+    }
+  ],
   "members": [
     {
       "id": "jarle",

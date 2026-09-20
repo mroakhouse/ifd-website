@@ -1,27 +1,33 @@
+<script setup>
+import { content, contentStatus, loadContent } from '../lib/content'
+</script>
 <template>
   <div class="wrap page">
     <p class="eyebrow">THE SOUND OF DESTRUCTION</p>
     <h1>TURN IT <span>UP.</span></h1>
-    <div class="music-feature">
+    <p v-if="contentStatus.error" role="status">
+      {{ contentStatus.error }} <button class="text-link" @click="loadContent">Retry</button>
+    </p>
+    <p v-if="!content.music.length" class="page-intro">
+      New music is on the way. Check back for releases.
+    </p>
+    <div v-for="release in content.music" :key="release.id" class="music-feature">
       <div class="album-art">
-        <img src="/Logo.png" alt="Issued For Destruction skull artwork" />
+        <img :src="release.image || '/Logo.png'" :alt="release.title + ' artwork'" loading="lazy" />
       </div>
       <div>
-        <p class="eyebrow">LISTEN ON SOUNDCLOUD</p>
-        <h2>Satan Just Arrived</h2>
-        <p>Heavy riffs. Raw energy. Issued For Destruction.</p>
-        <a
-          class="button primary"
-          href="https://soundcloud.com/thomas-eike-hustoft/issued-for-destruction-satan-just-arrived"
-          target="_blank"
-          rel="noopener noreferrer"
-          >▶ Play on SoundCloud</a
+        <p class="eyebrow">LISTEN ON {{ release.platform }}</p>
+        <h2>{{ release.title }}</h2>
+        <p class="release-description">{{ release.description }}</p>
+        <a class="button primary" :href="release.url" target="_blank" rel="noopener noreferrer"
+          >▶ Play on {{ release.platform }}</a
         ><a
+          v-if="release.videoUrl"
           class="text-link"
-          href="https://www.youtube.com/@IssuedForDestruction"
+          :href="release.videoUrl"
           target="_blank"
           rel="noopener noreferrer"
-          >Watch on YouTube ↗</a
+          >Watch video ↗</a
         >
       </div>
     </div>
@@ -35,3 +41,8 @@
     </div>
   </div>
 </template>
+<style scoped>
+.release-description {
+  white-space: pre-wrap;
+}
+</style>

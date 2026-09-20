@@ -1,4 +1,5 @@
 <script setup>
+// Shared reactive content supplies the biography and lineup and updates after a reload.
 import { content } from '../lib/content'
 </script>
 <template>
@@ -8,6 +9,7 @@ import { content } from '../lib/content'
     <div class="story-layout">
       <h2>No master plan.<br />Just heavy riffs.</h2>
       <div class="prose">
+        <!-- Blank lines in the saved biography separate its paragraphs. -->
         <p v-for="(paragraph, index) in content.story.split('\n\n')" :key="index">
           {{ paragraph }}
         </p>
@@ -21,8 +23,10 @@ import { content } from '../lib/content'
         </div>
       </div>
       <div class="member-grid">
+        <!-- Stable IDs keep each card tied to its member if the lineup is reordered. -->
         <article v-for="(member, index) in content.members" :key="member.id" class="member-card">
           <div class="portrait">
+            <!-- Use the band logo when a member has no photo URL. -->
             <img :src="member.image || '/Logo.png'" :alt="member.name" loading="lazy" /><span
               >0{{ index + 1 }}</span
             >
