@@ -16,35 +16,45 @@ import { loadContent } from '../lib/content'
 // read or change them through .value; the template unwraps them automatically.
 // user is the signed-in account; loading covers startup and busy covers an action.
 // error and notice contain the failure or success message shown beside the controls.
+
 const user = ref(null),
   loading = ref(true),
   busy = ref(false),
   error = ref(''),
   notice = ref('')
+
 // Authentication form values. mode chooses login, recover (send a reset link),
 // reset (set a new password), or invite (accept an invitation using inviteToken).
+
 const email = ref(''),
   password = ref(''),
   mode = ref('login'),
   inviteToken = ref('')
+
 // data is the editable content. version identifies the server copy we loaded so
 // saving can detect another editor's changes. baseline is our last saved snapshot.
 // tab chooses a section, selected holds an entry ID, and preview shows a news preview.
+
 const data = ref(null),
   version = ref(null),
   baseline = ref(''),
   tab = ref('news'),
   selected = ref(null),
   preview = ref(false)
+
 // Computed values update when their reactive inputs change.
 // Compare the whole content snapshot to detect edits, additions, and removals.
+
 const dirty = computed(() => data.value && JSON.stringify(data.value) !== baseline.value)
+
 // Look up the selected entry so form fields edit that object directly.
+
 const item = computed(() =>
   tab.value === 'story'
     ? null
     : data.value?.[tab.value]?.find((entry) => entry.id === selected.value),
 )
+
 const sections = {
   news: 'News stories',
   members: 'Band members',
@@ -52,19 +62,24 @@ const sections = {
   music: 'Music',
   story: 'Band story',
 }
+
 const entryName = computed(
   () =>
     ({ news: 'news story', members: 'member', shows: 'show', music: 'music release' })[tab.value],
 )
+
 function entryDetail(entry) {
   if (tab.value === 'news') return entry.published ? 'Published' : 'Draft'
   if (tab.value === 'shows') return `${entry.date} / ${entry.status}`
   return tab.value === 'music' ? entry.platform : entry.role
 }
+
 // Controls editor visibility; the server also checks permissions on API requests.
+
 const isAdmin = computed(() => user.value?.roles?.includes('admin'))
 
 // Send an editor request and turn API failures into messages that run() can display.
+
 async function api(options) {
   const response = await fetch('/api/content?admin=1', options)
   // A plain Vite server may return HTML here because it cannot run Netlify Functions.
@@ -76,7 +91,9 @@ async function api(options) {
   if (!response.ok) throw new Error(result.error || 'Request failed.')
   return result
 }
+
 // Load editable content, including drafts, and mark this copy as the saved baseline.
+
 async function read() {
   const result = await api()
   data.value = result.content
@@ -189,8 +206,10 @@ function remove() {
   data.value[tab.value] = data.value[tab.value].filter((entry) => entry.id !== selected.value)
   selected.value = null
 }
+
 // Save all sections together, sending the version to avoid overwriting a newer
 // server copy. Use the returned content as the new baseline after a successful save.
+
 async function save() {
   await run(async () => {
     const result = await api({
@@ -202,10 +221,12 @@ async function save() {
     version.value = result.version
     baseline.value = JSON.stringify(data.value)
     notice.value = 'Saved. Published content is now live; drafts stay private.'
+
     // Refresh the shared public content used by the other pages in this session.
     await loadContent()
   })
 }
+
 // Confirm before abandoning edits, then end the session and clear editor content.
 async function signOut() {
   if (dirty.value && !window.confirm('Discard unsaved changes and log out?')) return
@@ -217,6 +238,7 @@ async function signOut() {
     selected.value = null
   })
 }
+
 // Ask the browser to warn about unsaved edits when the tab is closed or reloaded.
 function beforeUnload(event) {
   if (dirty.value) {
@@ -224,12 +246,16 @@ function beforeUnload(event) {
     event.returnValue = ''
   }
 }
+
 // Remove the browser listener when this page is destroyed. The router guard below
 // provides the equivalent warning for navigation within the website.
 window.addEventListener('beforeunload', beforeUnload)
+
 onBeforeUnmount(() => window.removeEventListener('beforeunload', beforeUnload))
+
 onBeforeRouteLeave(() => !dirty.value || window.confirm('Leave and discard unsaved changes?'))
 </script>
+
 <template>
   <div class="wrap page">
     <p v-if="loading" role="status">Opening the backstage door…</p>

@@ -1,8 +1,10 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+
 const open = ref(false)
 const route = useRoute()
+
 watch(
   () => route.path,
   () => {
@@ -10,6 +12,7 @@ watch(
   },
 )
 </script>
+
 <template>
   <header class="site-header">
     <nav class="nav wrap" aria-label="Main navigation">
